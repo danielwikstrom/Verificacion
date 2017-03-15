@@ -7,14 +7,14 @@ import unittest
 
 class CoreTestSuite(unittest.TestCase):
     """Test cases for Core"""
-
-    def test_add(self):
-        self.assertEqual(sample.add(1,1),2)
-
-    def test_add_not_invalid_result(self):
-        self.assertNotEqual(sample.add(1,1),3)
-    def test_add_int_string(self):
-        #setup
-        self.assertEqual(sample.add(1,'cad','1cad'))
+    def test_countTwoWords(self):
+        result = sample.analIce("patta macarron")
+        self.assertEqual(len(result),2)
+    def test_countSameWord(self):
+        result = sample.analIce("patta patta")
+        self.assertEqual(len(result),1)
+    def test_countTwoWords(self):
+        result = sample.analIce("patta patta")
+        self.assertEqual(result[0][1],2)
 if __name__ == '__main__':
     unittest.main()
