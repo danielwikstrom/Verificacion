@@ -10,7 +10,7 @@ def analIce(inputString):
         #print c
     #words = [word.lower() for word in uniInput.split(" ")]
 
-    rexUnPoliciaDiferente = r"[a-zA-Z'0-9(\xed)(\xc1)(\xe1)(\xc9)(\xcd)(\xd1)(\xda)(\xf1)(\xf3)(\xfa)(\xfc)(\xe9)(\xd3)(\xdc)]+"
+    rexUnPoliciaDiferente = r"[a-zA-Z'0-9\xed\xc1\xe1\xc9\xcd\xd1\xda\xf1\xf3\xfa\xfc\xe9\xd3\xdc]+"
 
 
     matches = re.findall(rexUnPoliciaDiferente,uniInput)

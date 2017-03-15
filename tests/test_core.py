@@ -22,6 +22,7 @@ class CoreTestSuite(unittest.TestCase):
     def test_simbolNotIncluded(self):
         result = sample.analIce(".:...:.:::.:?¿!perro")
         self.assertEqual(result[0][0],'perro')
+        self.assertEqual(len(result),1)
     def test_simbolSeparateWords(self):
         result = sample.analIce("verificar!pudiendo?verificar")
         self.assertEqual(result[0][0],'verificar')
