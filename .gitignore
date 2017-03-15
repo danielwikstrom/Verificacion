@@ -3,3 +3,4 @@ ENV
 *.xml
 .coverage
 .idea
+.xml
