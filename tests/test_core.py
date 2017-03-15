@@ -10,7 +10,7 @@ class CoreTestSuite(unittest.TestCase):
     def test_countTwoWords(self):
         result = sample.analIce("patta macarron")
         self.assertEqual(len(result),2)
-    def test_countSameWord(self):
+    def test_groupSameWord(self):
         result = sample.analIce("patta patta")
         self.assertEqual(len(result),1)
     def test_countTwoWords(self):
@@ -36,6 +36,25 @@ class CoreTestSuite(unittest.TestCase):
         result = sample.analIce("y'all wanna kill y'all?")
         self.assertEqual(len(result), 3)
         self.assertEqual(result[0][0],"y'all")
+    def test_accentMark(self):
+        result = sample.analIce("Quién")
+        self.assertEqual(result[0][0], u"quién")
+    def test_accentCaps(self):
+        result = sample.analIce("QuiÉn")
+        self.assertEqual(result[0][0], u"quién")
+    def test_email(self):
+        result = sample.analIce("juan.gomez@live.u-tad.com")
+        self.assertEqual(len(result),6)
+    def test_tabulation(self):
+        result = sample.analIce("hola   que tal ")
+        self.assertEqual(len(result), 3)
+    def test_dieresis(self):
+        result = sample.analIce("pingüino")
+        self.assertEqual(result[0][0],u"pingüino")
+    def test_virgulilla(self):
+        result = sample.analIce("años")
+        self.assertEqual(result[0][0],u"años")
+
 
 
 if __name__ == '__main__':
