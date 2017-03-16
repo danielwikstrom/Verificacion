@@ -14,7 +14,7 @@ def analIce(inputString):
 
 
     matches = re.findall(rexUnPoliciaDiferente,uniInput)
-    coolWords = [match.lower()for match in matches if match not in stopWords]
+    coolWords = [match.lower()for match in matches if match.lower() not in stopWords]
     utf8Result = filter (lambda x: x.encode('utf8'),coolWords)
 
     return Counter(utf8Result).most_common()

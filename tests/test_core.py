@@ -81,6 +81,30 @@ class CoreTestSuite(unittest.TestCase):
         result = sample.analIce("años")
         self.assertEqual(result[0][0],u"años")
 
+    def test_countStopword(self):
+        result = sample.analIce("about all")
+        self.assertEqual(len(result), 0)
+
+    def test_countStopwordTogether(self):
+        result = sample.analIce("aboutall the")
+        self.assertEqual(len(result), 1)
+
+    def test_countStopwordTogetherPoint(self):
+        result = sample.analIce("about.all/the")
+        self.assertEqual(len(result), 0)
+
+    def test_countStopwordWithword(self):
+        result = sample.analIce("Let me go in the")
+        self.assertEqual(len(result), 2)
+
+    def test_countStopwordWith(self):
+        result = sample.analIce("a a all machine-gunball all machine")
+        self.assertEqual(result[0][0], "machine")
+        self.assertEqual(result[1][1], 1)
+
+    def test_countStopwordWithCaps(self):
+        result = sample.analIce("a an About how HoW about An a")
+        self.assertEqual(len(result), 0)
 
 
 if __name__ == '__main__':
