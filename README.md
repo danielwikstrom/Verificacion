@@ -1,7 +1,11 @@
-# Sample Repository
+# Cuenta palabras
 
-This simple project is an example repo for Python projects for Verificación y Desarrollo de Software.
+Script que dado un texto de longitud variable devuelve una lista ordenada con todas las palabras y el numero de veces
+que se encuentran en el texto.
 
+## Palabras
+las palabras aceptadas son las que estén formadas por letras de la a-z(tanto minúscula como mayúscula), números del 0 al 9,
+y letras con tildes, incluidas en los codigos utf-8 especificados
 ## Setup
 
 1. Install Python
