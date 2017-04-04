@@ -30,5 +30,24 @@ def analIce(inputString):
     utf8Result = filter (lambda x: x.encode('utf8'),coolWords)
 
     return Counter(utf8Result).most_common()
+
+
+
 if __name__ == "__main__":
+
     print analIce("Hola hey hey HEY Aquíaaa AquÍaaa.  Á  É  Í Ñ Ó Ú Ü á é í  ó ú ü ñu I'm a about ab1ba ")
+
+"""
+Como crear la conexión
+
+ conexion= connection.Conection()
+    cliente=conexion.conected() #Conexion creada
+
+
+    contenido=cliente.city.find_one() #city es la coleccion de la base de datos en la querramos hacer la operación find_one
+
+
+
+
+
+"""
