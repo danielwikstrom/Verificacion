@@ -1,6 +1,8 @@
 # This Python file uses the following encoding: utf-8
 from collections import Counter
+import Connection
 import re
+import string
 
 def analIce(inputString):
 
@@ -34,9 +36,19 @@ def analIce(inputString):
 
 
 if __name__ == "__main__":
-
-    print analIce("Hola hey hey HEY Aquíaaa AquÍaaa.  Á  É  Í Ñ Ó Ú Ü á é í  ó ú ü ñu I'm a about ab1ba ")
-
+    palabra=[]
+    palabra=analIce("Hola hey hey HEY Aquíaaa AquÍaaa.  Á  É  Í Ñ Ó Ú Ü á é í  ó ú ü ñu I'm a about ab1ba ")
+    conexion = Connection.Conection()
+    cliente = conexion.conected()
+    print type(palabra)
+    #dict={k:v for k,v in(x.split(',')for x in palabra)}
+    diccionario={}
+    for i,val in enumerate(palabra):
+        diccionario.update({palabra[i][0]:palabra[i][1]})
+        print diccionario
+     #Conexion creada
+    cliente.words.insert(diccionario)
+#print dict
 """
 Como crear la conexión
 
@@ -45,9 +57,5 @@ Como crear la conexión
 
 
     contenido=cliente.city.find_one() #city es la coleccion de la base de datos en la querramos hacer la operación find_one
-
-
-
-
 
 """
