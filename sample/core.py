@@ -56,7 +56,7 @@ if __name__ == "__main__":
     #Create(palabra,'limon')
     # print Read('limon')
     #Update('limon','hey',6)
-    Delete('limon')
+    #Delete('limon')
 
 
 #print dict
