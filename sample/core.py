@@ -1,7 +1,11 @@
 # This Python file uses the following encoding: utf-8
 from collections import Counter
+import Connection
 import re
+import string
 
+conexion = Connection.Conection()
+cliente = conexion.conected()
 def analIce(inputString):
 
     """las stopwords son las palabras que debe ignorar el ñrograma a la hora de contar palabras"""
@@ -31,12 +35,31 @@ def analIce(inputString):
 
     return Counter(utf8Result).most_common()
 
+def Create(inputString,identificador):
+    diccionario = {}
+    diccionario.update({'identificador':identificador})
+    for i, val in enumerate(palabra):
+        diccionario.update({palabra[i][0]: palabra[i][1]})
 
+    cliente.words.insert(diccionario)
+def Read(identificador):
+    return cliente.words.find({'identificador':identificador})
+
+def Update(identificador,key,value):
+    cliente.words.update({'identificador':identificador},{'$set':{key:value}})
+def Delete(identificador):
+    cliente.words.remove({'identificador':identificador})
 
 if __name__ == "__main__":
+    palabra=[]
+    palabra=analIce("Hola hey hey HEY Aquíaaa AquÍaaa.  Á  É  Í Ñ Ó Ú Ü á é í  ó ú ü ñu I'm a about ab1ba ")
+    #Create(palabra,'limon')
+    # print Read('limon')
+    #Update('limon','hey',6)
+    #Delete('limon')
 
-    print analIce("Hola hey hey HEY Aquíaaa AquÍaaa.  Á  É  Í Ñ Ó Ú Ü á é í  ó ú ü ñu I'm a about ab1ba ")
 
+#print dict
 """
 Como crear la conexión
 
@@ -45,9 +68,5 @@ Como crear la conexión
 
 
     contenido=cliente.city.find_one() #city es la coleccion de la base de datos en la querramos hacer la operación find_one
-
-
-
-
 
 """
