@@ -38,15 +38,17 @@ def analIce(inputString):
 def Create(inputString,identificador):
     diccionario = {}
     diccionario.update({'identificador':identificador})
-    for i, val in enumerate(palabra):
-        diccionario.update({palabra[i][0]: palabra[i][1]})
+    diccionario.update(palabra)
+    print diccionario
 
     cliente.words.insert(diccionario)
+
 def Read(identificador):
     return cliente.words.find({'identificador':identificador})
 
 def Update(identificador,key,value):
     cliente.words.update({'identificador':identificador},{'$set':{key:value}})
+
 def Delete(identificador):
     cliente.words.remove({'identificador':identificador})
 
