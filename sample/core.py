@@ -34,21 +34,29 @@ def analIce(inputString):
     utf8Result = filter (lambda x: x.encode('utf8'),coolWords)
 
     return Counter(utf8Result).most_common()
-
+listId=[]
 def Create(inputString,identificador):
     diccionario = {}
+    if identificador in listId:
+        print("ya esiste ese id")
+        return
+    listId.append(identificador)
     diccionario.update({'identificador':identificador})
-    for i, val in enumerate(palabra):
-        diccionario.update({palabra[i][0]: palabra[i][1]})
+    diccionario.update(palabra)
+    print diccionario
 
     cliente.words.insert(diccionario)
+
 def Read(identificador):
     return cliente.words.find({'identificador':identificador})
 
 def Update(identificador,key,value):
     cliente.words.update({'identificador':identificador},{'$set':{key:value}})
+
 def Delete(identificador):
-    cliente.words.remove({'identificador':identificador})
+    if identificador in listId:
+        listId.remove(identificador)
+        cliente.words.remove({'identificador':identificador})
 
 if __name__ == "__main__":
     palabra=[]
