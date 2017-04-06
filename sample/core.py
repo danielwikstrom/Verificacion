@@ -37,10 +37,12 @@ def analIce(inputString):
 
     return Counter(utf8Result).most_common()
 def Create(inputString,cliente):
+    if(not inputString):
+        return None
     diccionario = {}
 
 
-    diccionario.update({'palabras':palabra})
+    diccionario.update({'palabras':inputString})
     #print diccionario
     return cliente.words.insert(diccionario)
 
