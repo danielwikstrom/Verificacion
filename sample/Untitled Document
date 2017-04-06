@@ -1,6 +1,6 @@
 # This Python file uses the following encoding: utf-8
 from collections import Counter
-from bson import objectid
+
 import Connection
 
 import re
@@ -37,8 +37,8 @@ def analIce(inputString):
 
     return Counter(utf8Result).most_common()
 def Create(inputString,cliente):
-    #if(not inputString):
-     #   return None
+    if(not inputString):
+        return None
     diccionario = {}
 
 
@@ -48,18 +48,14 @@ def Create(inputString,cliente):
 
 
 def Read(identificador,db):
-    #try:
-    if not objectid.ObjectId.is_valid(identificador):
-        print "Error de identificador"
-        return 'notValid'
-    diccionarioLeido=db.words.find({'_id': identificador}).next()
-    #except StopIteration:
-     #   return None
+    try:
+        diccionarioLeido=db.words.find({'_id': identificador}).next()
+    except StopIteration:
+        print "Lista vacía"
+        return None
     return diccionarioLeido
 
 def Update(identificador,db,key,value):
-    #if(not bson.objectId.ObjectId.is_valid(identificador)):
-	#return 'notValidID'
     if(not value or not key):
         return None
     db.words.update({'_id':identificador},{'$set':{key:value}})
@@ -79,10 +75,9 @@ if __name__ == "__main__":
 
     print Read(identificador['_id'],cliente)
     Update(identificador['_id'],cliente,'palabras.1.1',17)
-    Update(identificador['_id'],cliente,'',17)
     Delete(identificador,cliente)
     
-    
+
 """
 Como crear la conexión
 

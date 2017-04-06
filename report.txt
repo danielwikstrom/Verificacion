@@ -1,6 +1,3 @@
-coverage run sample/core.py
-[(u'hey', 3), (u'\xe1', 2), (u'\xe9', 2), (u'\xed', 2), (u'\xf3', 2), (u'aqu\xedaaa', 2), (u'\xfa', 2), (u'\xfc', 2), (u'\xf1u', 1), (u'\xf1', 1), (u'ab1ba', 1), (u'hola', 1)]
-coverage report -m
-Name             Stmts   Miss  Cover   Missing
-----------------------------------------------
-sample/core.py      12      0   100%
+Name                                                                         Stmts   Miss  Cover   Missing
+----------------------------------------------------------------------------------------------------------
+sample/core.py                                                                  45      3    93%   24, 53-54
