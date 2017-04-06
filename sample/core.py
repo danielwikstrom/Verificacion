@@ -51,7 +51,11 @@ def Read(identificador,db):
     return db.words.find({'_id':identificador}).next()
 
 def Update(identificador,db,key,value):
+    if(not value or not key):
+        return None
     db.words.update({'_id':identificador},{'$set':{key:value}})
+    res=db.words.aggregate([{'$match':{'_id':identificador}},{'$project':{'_id':0,'palabras':1}}]).next()['palabras']['key']
+    return res
 
 def Delete(identificador,db):
     db.words.remove({'_id': identificador})
@@ -59,8 +63,11 @@ def Delete(identificador,db):
 
 if __name__ == "__main__":
     palabra=[]
-    palabra=analIce("Hola hey hey HEY Aquíaaa AquÍaaa.  Á  É  Í Ñ Ó Ú Ü á é í  ó ú ü ñu I'm a about ab1ba ")
-    print Create(palabra,cliente)
+    #palabra=analIce("Hola hey hey HEY Aquíaaa AquÍaaa.  Á  É  Í Ñ Ó Ú Ü á é í  ó ú ü ñu I'm a about ab1ba ")
+    palabra={'key':'value'}
+    id= Create(palabra,cliente)
+    Update(id,cliente,'palabras.key',43)
+    #print cliente.words.aggregate([{'$project':{'_id':0,'palabras':1}}]).next()['palabras']['key']
     #identificador=cliente.words.aggregate([{'$project':{'_id':1}},{'$limit':1}]).next()
     #print identificador['_id']
     #print Read(identificador['_id'],cliente)
