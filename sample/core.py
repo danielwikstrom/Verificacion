@@ -36,6 +36,9 @@ def analIce(inputString):
     utf8Result = filter (lambda x: x.encode('utf8'),coolWords)
 
     return Counter(utf8Result).most_common()
+
+"""La función create crea el documento que contiene el diccionario obtenido a través del String inputString y lo inserta en la colección words de mongo.
+    Si la función no recibe ningúnstring, devuelve None."""
 def Create(inputString,cliente):
     if(not inputString):
         return None
@@ -46,15 +49,15 @@ def Create(inputString,cliente):
     #print diccionario
     return cliente.words.insert(diccionario)
 
-
+"""La función Read devuelve el diccionario cuyo identificador se introduce como variable. Si no hay ningún documento con ese ID, devuelve un None"""
 def Read(identificador,db):
     try:
         diccionarioLeido=db.words.find({'_id': identificador}).next()
     except StopIteration:
-        print "Lista vacía"
         return None
     return diccionarioLeido
 
+"""La función Update modifica el contador de la palabra introducida como key al valor value. Si no se introduce una clave o un valor, devuelve None"""
 def Update(identificador,db,key,value):
     if(not value or not key):
         return None
@@ -62,6 +65,7 @@ def Update(identificador,db,key,value):
     res=db.words.aggregate([{'$match':{'_id':identificador}},{'$project':{'_id':0,'palabras':1}}]).next()['palabras']['key']
     return res
 
+"""La función Delete borra el documento con el identificador introducido"""
 def Delete(identificador,db):
     db.words.remove({'_id': identificador})
 
@@ -74,7 +78,7 @@ if __name__ == "__main__":
     id= Create(palabra,cliente)
 
     #Update(id,cliente,'palabras.key',43)
-    print Read(id,cliente)['palabras']['key']
+    #print Read(0,cliente)['palabras']['key']
     #print cliente.words.aggregate([{'$project':{'_id':0,'palabras':1}}]).next()['palabras']['key']
     #identificador=cliente.words.aggregate([{'$project':{'_id':1}},{'$limit':1}]).next()
     #print identificador['_id']
