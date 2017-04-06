@@ -16,7 +16,7 @@ class databaseTestSuite(unittest.TestCase):
         self.assertEqual(type(sample.Create(self.dictionary,self.db)),objectid.ObjectId)
 
     def test_insertWithContent(self):
-        self.dictionary={'key','value'}
+        self.dictionary={'key':'value'}
         print type(sample.Create(self.dictionary,self.db))
         self.assertEqual(type(sample.Create(self.dictionary,self.db)),objectid.ObjectId)
 
@@ -24,4 +24,26 @@ class databaseTestSuite(unittest.TestCase):
         self.dictionary={}
         print type(sample.Create(self.dictionary,self.db))
         self.assertEqual(sample.Create(self.dictionary,self.db),None)
-    
+    def test_Update(self):
+        self.dictionary={'key':'value'}
+        self.ID=sample.Create(self.dictionary,self.db)
+        self.assertEqual(sample.Update(self.ID,self.db,'palabras.key','RexUnPoliciaDiferente'),'RexUnPoliciaDiferente')
+
+    def test_UpdateNoKey(self):
+        self.dictionary = {'key': 'value'}
+        self.ID = sample.Create(self.dictionary, self.db)
+        self.assertEqual(sample.Update(self.ID, self.db, '', 'RexUnPoliciaDiferente'),None)
+    def test_UpdateNoValue(self):
+        self.dictionary = {'key': 'value'}
+        self.ID = sample.Create(self.dictionary, self.db)
+        self.assertEqual(sample.Update(self.ID, self.db, 'palabras.key', ''),None)
+    def test_DeleteValue(self):
+        self.dictionary={'key':'value'}
+        self.ID =sample.Create(self.dictionary,self.db)
+        self.assertEqual(sample.Delete(self.ID,self.db),None)
+
+    def test_DeleteNoValues(self):
+        self.dictionary = {}
+        self.ID = sample.Create(self.dictionary, self.db)
+        self.assertEqual(sample.Delete(self.ID, self.db), None)
+
