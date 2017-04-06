@@ -1,1 +1,1 @@
-from .core import analIce,Create,Update
+from .core import analIce,Create,Update,Delete

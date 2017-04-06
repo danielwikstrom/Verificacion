@@ -66,7 +66,9 @@ if __name__ == "__main__":
     #palabra=analIce("Hola hey hey HEY Aquíaaa AquÍaaa.  Á  É  Í Ñ Ó Ú Ü á é í  ó ú ü ñu I'm a about ab1ba ")
     palabra={'key':'value'}
     id= Create(palabra,cliente)
+
     Update(id,cliente,'palabras.key',43)
+
     #print cliente.words.aggregate([{'$project':{'_id':0,'palabras':1}}]).next()['palabras']['key']
     #identificador=cliente.words.aggregate([{'$project':{'_id':1}},{'$limit':1}]).next()
     #print identificador['_id']

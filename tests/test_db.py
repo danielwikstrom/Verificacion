@@ -37,3 +37,13 @@ class databaseTestSuite(unittest.TestCase):
         self.dictionary = {'key': 'value'}
         self.ID = sample.Create(self.dictionary, self.db)
         self.assertEqual(sample.Update(self.ID, self.db, 'palabras.key', ''),None)
+    def test_DeleteValue(self):
+        self.dictionary={'key':'value'}
+        self.ID =sample.Create(self.dictionary,self.db)
+        self.assertEqual(sample.Delete(self.ID,self.db),None)
+
+    def test_DeleteV    alue3(self):
+        self.dictionary = {}
+        self.ID = sample.Create(self.dictionary, self.db)
+        self.assertEqual(sample.Delete(self.ID, self.db), None)
+
