@@ -1,7 +1,13 @@
 # This Python file uses the following encoding: utf-8
 from collections import Counter
-import re
 
+import Connection
+
+import re
+import string
+
+conexion = Connection.Conection()
+cliente = conexion.conected()
 def analIce(inputString):
 
     """las stopwords son las palabras que debe ignorar el ñrograma a la hora de contar palabras"""
@@ -30,5 +36,65 @@ def analIce(inputString):
     utf8Result = filter (lambda x: x.encode('utf8'),coolWords)
 
     return Counter(utf8Result).most_common()
+
+"""La función create crea el documento que contiene el diccionario obtenido a través del String inputString y lo inserta en la colección words de mongo.
+    Si la función no recibe ningúnstring, devuelve None."""
+def Create(inputString,cliente):
+    if(not inputString):
+        return None
+    diccionario = {}
+
+
+    diccionario.update({'palabras':inputString})
+    #print diccionario
+    return cliente.words.insert(diccionario)
+
+"""La función Read devuelve el diccionario cuyo identificador se introduce como variable. Si no hay ningún documento con ese ID, devuelve un None"""
+def Read(identificador,db):
+    try:
+        diccionarioLeido=db.words.find({'_id': identificador}).next()
+    except StopIteration:
+        return None
+    return diccionarioLeido
+
+"""La función Update modifica el contador de la palabra introducida como key al valor value. Si no se introduce una clave o un valor, devuelve None"""
+def Update(identificador,db,key,value):
+    if(not value or not key):
+        return None
+    db.words.update({'_id':identificador},{'$set':{key:value}})
+    res=db.words.aggregate([{'$match':{'_id':identificador}},{'$project':{'_id':0,'palabras':1}}]).next()['palabras']['key']
+    return res
+
+"""La función Delete borra el documento con el identificador introducido"""
+def Delete(identificador,db):
+    db.words.remove({'_id': identificador})
+
+
 if __name__ == "__main__":
-    print analIce("Hola hey hey HEY Aquíaaa AquÍaaa.  Á  É  Í Ñ Ó Ú Ü á é í  ó ú ü ñu I'm a about ab1ba ")
+    palabra=[]
+    #palabra=analIce("Hola hey hey HEY Aquíaaa AquÍaaa.  Á  É  Í Ñ Ó Ú Ü á é í  ó ú ü ñu I'm a about ab1ba ")
+    #palabra={'key':'value'}
+    palabra = {'key': 'value', 'hola':'adios'}
+    id= Create(palabra,cliente)
+
+    #Update(id,cliente,'palabras.key',43)
+    #print Read(0,cliente)['palabras']['key']
+    #print cliente.words.aggregate([{'$project':{'_id':0,'palabras':1}}]).next()['palabras']['key']
+    #identificador=cliente.words.aggregate([{'$project':{'_id':1}},{'$limit':1}]).next()
+    #print identificador['_id']
+    #print Read(identificador['_id'],cliente)
+    #Update(identificador['_id'],cliente,'palabras.1.1',17)
+    #Delete(1,cliente)
+
+
+#print dict
+"""
+Como crear la conexión
+
+ conexion= connection.Conection()
+    cliente=conexion.conected() #Conexion creada
+
+
+    contenido=cliente.city.find_one() #city es la coleccion de la base de datos en la querramos hacer la operación find_one
+
+"""
