@@ -38,30 +38,31 @@ def analIce(inputString):
 def Create(inputString):
     diccionario = {}
 
-    identificador= cliente.words.count()
-    diccionario.update({'_id':identificador})
+
     diccionario.update({'palabras':palabra})
     #print diccionario
     cliente.words.insert(diccionario)
 
 
 def Read(identificador):
-    return cliente.words.find({'_id':identificador})
+    return cliente.words.find({'_id':identificador}).next()
 
 def Update(identificador,key,value):
     cliente.words.update({'_id':identificador},{'$set':{key:value}})
 
 def Delete(identificador):
-    cliente.words.update({'_id': identificador},{'':''})
+    cliente.words.remove({'_id': identificador})
 
 
 if __name__ == "__main__":
     palabra=[]
     palabra=analIce("Hola hey hey HEY Aquíaaa AquÍaaa.  Á  É  Í Ñ Ó Ú Ü á é í  ó ú ü ñu I'm a about ab1ba ")
     #Create(palabra)
-    #print Read(4).next()
-    #Update(4,'hey',6)
-    Delete(1)
+    #identificador=cliente.words.aggregate([{'$project':{'_id':1}},{'$limit':1}]).next()
+    #print identificador['_id']
+    #print Read(identificador['_id'])
+    #Update(identificador['_id'],'palabras.1.1',17)
+    #Delete(1)
 
 
 #print dict
