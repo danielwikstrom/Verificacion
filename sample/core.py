@@ -1,5 +1,6 @@
 # This Python file uses the following encoding: utf-8
 from collections import Counter
+
 import Connection
 
 import re
@@ -35,34 +36,34 @@ def analIce(inputString):
     utf8Result = filter (lambda x: x.encode('utf8'),coolWords)
 
     return Counter(utf8Result).most_common()
-def Create(inputString):
+def Create(inputString,cliente):
     diccionario = {}
 
 
     diccionario.update({'palabras':palabra})
     #print diccionario
-    cliente.words.insert(diccionario)
+    return cliente.words.insert(diccionario)
 
 
-def Read(identificador):
-    return cliente.words.find({'_id':identificador}).next()
+def Read(identificador,db):
+    return db.words.find({'_id':identificador}).next()
 
-def Update(identificador,key,value):
-    cliente.words.update({'_id':identificador},{'$set':{key:value}})
+def Update(identificador,db,key,value):
+    db.words.update({'_id':identificador},{'$set':{key:value}})
 
-def Delete(identificador):
-    cliente.words.remove({'_id': identificador})
+def Delete(identificador,db):
+    db.words.remove({'_id': identificador})
 
 
 if __name__ == "__main__":
     palabra=[]
     palabra=analIce("Hola hey hey HEY Aquíaaa AquÍaaa.  Á  É  Í Ñ Ó Ú Ü á é í  ó ú ü ñu I'm a about ab1ba ")
-    #Create(palabra)
+    print Create(palabra,cliente)
     #identificador=cliente.words.aggregate([{'$project':{'_id':1}},{'$limit':1}]).next()
     #print identificador['_id']
-    #print Read(identificador['_id'])
-    #Update(identificador['_id'],'palabras.1.1',17)
-    #Delete(1)
+    #print Read(identificador['_id'],cliente)
+    #Update(identificador['_id'],cliente,'palabras.1.1',17)
+    #Delete(1,cliente)
 
 
 #print dict
