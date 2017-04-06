@@ -1,6 +1,7 @@
 # This Python file uses the following encoding: utf-8
 from collections import Counter
 import Connection
+
 import re
 import string
 
@@ -34,37 +35,33 @@ def analIce(inputString):
     utf8Result = filter (lambda x: x.encode('utf8'),coolWords)
 
     return Counter(utf8Result).most_common()
-listId=[]
-def Create(inputString,identificador):
+def Create(inputString):
     diccionario = {}
-    if identificador in listId:
-        print("ya esiste ese id")
-        return
-    listId.append(identificador)
-    diccionario.update({'identificador':identificador})
-    diccionario.update(palabra)
-    print diccionario
 
+    identificador= cliente.words.count()
+    diccionario.update({'_id':identificador})
+    diccionario.update({'palabras':palabra})
+    #print diccionario
     cliente.words.insert(diccionario)
 
+
 def Read(identificador):
-    return cliente.words.find({'identificador':identificador})
+    return cliente.words.find({'_id':identificador})
 
 def Update(identificador,key,value):
-    cliente.words.update({'identificador':identificador},{'$set':{key:value}})
+    cliente.words.update({'_id':identificador},{'$set':{key:value}})
 
 def Delete(identificador):
-    if identificador in listId:
-        listId.remove(identificador)
-        cliente.words.remove({'identificador':identificador})
+    cliente.words.update({'_id': identificador},{'':''})
+
 
 if __name__ == "__main__":
     palabra=[]
     palabra=analIce("Hola hey hey HEY Aquíaaa AquÍaaa.  Á  É  Í Ñ Ó Ú Ü á é í  ó ú ü ñu I'm a about ab1ba ")
-    #Create(palabra,'limon')
-    # print Read('limon')
-    #Update('limon','hey',6)
-    #Delete('limon')
+    #Create(palabra)
+    #print Read(4).next()
+    #Update(4,'hey',6)
+    Delete(1)
 
 
 #print dict
