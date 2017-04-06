@@ -42,7 +42,7 @@ class databaseTestSuite(unittest.TestCase):
         self.ID =sample.Create(self.dictionary,self.db)
         self.assertEqual(sample.Delete(self.ID,self.db),None)
 
-    def test_DeleteV    alue3(self):
+    def test_DeleteNoValues(self):
         self.dictionary = {}
         self.ID = sample.Create(self.dictionary, self.db)
         self.assertEqual(sample.Delete(self.ID, self.db), None)
