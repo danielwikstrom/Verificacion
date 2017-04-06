@@ -48,7 +48,12 @@ def Create(inputString,cliente):
 
 
 def Read(identificador,db):
-    return db.words.find({'_id':identificador}).next()
+    try:
+        diccionarioLeido=db.words.find({'_id': identificador}).next()
+    except StopIteration:
+        print "Lista vacía"
+        return None
+    return diccionarioLeido
 
 def Update(identificador,db,key,value):
     if(not value or not key):
@@ -64,11 +69,12 @@ def Delete(identificador,db):
 if __name__ == "__main__":
     palabra=[]
     #palabra=analIce("Hola hey hey HEY Aquíaaa AquÍaaa.  Á  É  Í Ñ Ó Ú Ü á é í  ó ú ü ñu I'm a about ab1ba ")
-    palabra={'key':'value'}
+    #palabra={'key':'value'}
+    palabra = {'key': 'value', 'hola':'adios'}
     id= Create(palabra,cliente)
 
-    Update(id,cliente,'palabras.key',43)
-
+    #Update(id,cliente,'palabras.key',43)
+    print Read(id,cliente)['palabras']['key']
     #print cliente.words.aggregate([{'$project':{'_id':0,'palabras':1}}]).next()['palabras']['key']
     #identificador=cliente.words.aggregate([{'$project':{'_id':1}},{'$limit':1}]).next()
     #print identificador['_id']
