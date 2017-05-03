@@ -33,6 +33,10 @@ class CoreTestSuite(unittest.TestCase):
         with self.assertRaises(TypeError):
             sample.analIce(None)
 
+    def test_UnicodeInput(self):
+        string = 'dónde'
+        result = sample.analIce(unicode(string,encoding='utf-8'))
+        self.assertEqual(len(result), 1)
     #Test de simbolos
     def test_question(self):
         result= sample.analIce("¿dónde esta la lista?")

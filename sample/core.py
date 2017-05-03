@@ -4,7 +4,6 @@ from bson import objectid
 import Connection
 
 import re
-import string
 
 conexion = Connection.Conection()
 cliente = conexion.conected()
@@ -22,9 +21,11 @@ def analIce(inputString):
                 " you've your yours yourself yourselves ".split()
     if (inputString is None):
         raise TypeError
-
-
-    uniInput = unicode(inputString,encoding='utf-8')
+    print type(inputString)
+    if(isinstance(inputString,unicode)):
+        uniInput = inputString
+    else:
+        uniInput = unicode(inputString,encoding='utf-8')
 
     """las palabras aceptadas son las que estén formadas por letras de la a-z(tanto minúscula como mayúscula), números del 0 al 9,
      y letras con tildes, incluidas en los codigos utf-8 especificados"""
@@ -33,9 +34,7 @@ def analIce(inputString):
 
     matches = re.findall(rexUnPoliciaDiferente,uniInput)
     coolWords = [match.lower()for match in matches if match.lower() not in stopWords]
-    utf8Result = filter (lambda x: x.encode('utf8'),coolWords)
-
-    return Counter(utf8Result).most_common()
+    return Counter(coolWords).most_common()
 def Create(inputString,cliente):
     #if(not inputString):
      #   return None
