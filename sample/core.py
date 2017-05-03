@@ -21,7 +21,6 @@ def analIce(inputString):
                 " you've your yours yourself yourselves ".split()
     if (inputString is None):
         raise TypeError
-    print type(inputString)
     if(isinstance(inputString,unicode)):
         uniInput = inputString
     else:
@@ -64,6 +63,9 @@ def Update(identificador,db,key,value):
     db.words.update({'_id':identificador},{'$set':{key:value}})
     res=db.words.aggregate([{'$match':{'_id':identificador}},{'$project':{'_id':0,'palabras':1}}]).next()['palabras']['key']
     return res
+def ReadString(string,db):
+    identificador = objectid.ObjectId(string)
+    return db.words.find({'_id': identificador}).next()['palabras']
 
 def Delete(identificador,db):
     db.words.remove({'_id': identificador})

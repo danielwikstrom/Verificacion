@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <style>
+        .formedLabel *{
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<div style="text-align: center">
+    <h1 >Analice</h1>
+    <p>Introduce un texto para analizar</p>
+    <form action="/action/" id="usrform" method="post" >
+        {% csrf_token %}
+        {% for field in form %}
+             <p class="formedLabel">
+                {{ field.label_tag }} {{ field }}
+             </p>
+        {% endfor %}
+        <button type="button" onclick="myFunction()">Reset</button>
+        <input type="submit" value="Execute">
+
+    </form>
+
+
+
+
+
+</div>
+<div>
+<script>
+function myFunction() {
+    document.getElementById("id_text_content").value = "";
+}
+</script>
+</body>
+</html>
