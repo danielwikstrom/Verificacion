@@ -5,11 +5,15 @@
     <title>Result</title>
 </head>
 <body>
-        <div>
+        <div style="text-align: center">
             <h1>
                 Resultado
             </h1>
-        <p>{{ text_content }}</p>
+            <ul>
+                {% for  value in values %}
+                <li> <h4>{{value.0}} - {{value.1}}</h4></li>
+                {% endfor %}
+            </ul>
         </div>
 </body>
 </html>

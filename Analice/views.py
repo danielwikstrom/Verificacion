@@ -15,8 +15,8 @@ def index(request):
 def result(request):
     id = request.GET['id']
     text_content = core.ReadString(id,core.cliente)
-    print type(text_content)
-    return render(request,'Result.html',{'text_content':text_content})
+    print (text_content)
+    return render(request,'Result.html',{'values':text_content})
 def action(request):
 
     if request.method == 'POST':
