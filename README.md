@@ -1,3 +1,11 @@
+#Practica 4- Black Box testing - BDD y Selenium
+
+Hacer pip install de requirements.txt
+encender el servidor de mongo "mongod"
+encender el servidor de djando a través de consola-> $ python manage.py runserver
+Para realizar los tests, ir al directorio tests , y a traves de consola ejecutar: $ lettuce
+
+
 # Cuenta palabras
 
 Script que dado un texto de longitud variable devuelve una lista ordenada con todas las palabras y el numero de veces
