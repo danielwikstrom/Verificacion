@@ -1,5 +1,5 @@
 Feature: Write in text field
-    The text field gagablagblag
+    There is a text field where one can type in text to have it analized
     Scenario: Empty text field
         Given Open Firefox
         And go to "http://localhost:8000"

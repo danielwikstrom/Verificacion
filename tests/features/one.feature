@@ -1,6 +1,5 @@
 Feature: Execute button
-
-    Counts the number of times a word appears
+    Counts the number of times every word appears in a text
     Scenario: "Rex un Policia Diferente" in the text field
         Given Open Firefox
         And go to "http://localhost:8000"
@@ -18,7 +17,7 @@ Feature: Execute button
         And close Firefox
 
     Scenario: only spaces
-         Given Open Firefox
+        Given Open Firefox
         And go to "http://localhost:8000"
         And "   " is introduced
         When "execute" button is pressed

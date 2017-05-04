@@ -1,5 +1,4 @@
 from lettuce import*
-from lettuce_webdriver.util import assert_false
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
@@ -25,9 +24,9 @@ def write_feature(step,string):
     textAfter = textAfter[0:100]
 
     world.driver.find_element_by_id('id_text_content').send_keys(textAfter)
-    print world.driver.find_element_by_id('id_text_content').get_attribute('value')
 
-    print textAfter
+
+
     assert world.driver.find_element_by_id('id_text_content').get_attribute('value')== textAfter
 
 @step('there is only "([^"]*)" in text field')
@@ -48,4 +47,5 @@ def close(step):
 
 @step('is in result')
 def result(step):
+    time.sleep(2)
     assert str(world.driver.current_url[22:28]) == "result"
