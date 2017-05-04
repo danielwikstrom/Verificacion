@@ -18,11 +18,10 @@ def result(request):
     print (text_content)
     return render(request,'Result.html',{'values':text_content})
 def action(request):
-
     if request.method == 'POST':
         form = TextForm(request.POST)
-        queryResult = core.analIce(form.data['text_content'])
-        id = core.Create(queryResult,core.cliente)
         if(form.is_valid()):
+            queryResult = core.analIce(form.data['text_content'])
+            id = core.Create(queryResult,core.cliente)
             return HttpResponseRedirect('/result/'+'?id='+str(id))
-
+    return HttpResponseRedirect('/')
