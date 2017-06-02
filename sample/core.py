@@ -2,6 +2,9 @@
 from collections import Counter
 from bson import objectid
 import Connection
+import requests
+from bs4 import BeautifulSoup
+
 
 import re
 
@@ -71,19 +74,49 @@ def Delete(identificador,db):
     db.words.remove({'_id': identificador})
 
 
+def Scrapper(URL):
+    req = requests.get(URL)
+
+    ok = req.status_code
+
+    if ok == 200:
+
+        xml = BeautifulSoup(req.text, "lxml")
+        titulo = xml.find('title')
+        titulo = titulo.getText().split('|')[0]
+        cuerpo = xml.body.find_all('p', string=True)
+        # print cuerpo.get_attribute_list()
+        fecha = xml.find(itemprop="datePublished")
+        fecha = fecha.get('meta content')
+
+        # Aquí se obtienen las 3 partes que nos interesan de las noticias
+        print "Titulo: "
+        print titulo
+        print "Fecha: "
+        print fecha[:10]
+        print "Cuerpo: "
+        for i in cuerpo:
+            print i.getText()
+        print xml.body
+
+
+    else:
+        print ok
+
+
 if __name__ == "__main__":
-    palabra=[]
-    palabra=analIce("Hola hey hey HEY Aquíaaa AquÍaaa.  Á  É  Í Ñ Ó Ú Ü á é í  ó ú ü ñu I'm a about ab1ba ")
+    # palabra=[]
+    # palabra=analIce("Hola hey hey HEY Aquíaaa AquÍaaa.  Á  É  Í Ñ Ó Ú Ü á é í  ó ú ü ñu I'm a about ab1ba ")
 
-    id= Create(palabra,cliente)
-    identificador=cliente.words.aggregate([{'$project':{'_id':1}},{'$limit':1}]).next()
+    # id= Create(palabra,cliente)
+    # identificador=cliente.words.aggregate([{'$project':{'_id':1}},{'$limit':1}]).next()
 
-    print Read(identificador['_id'],cliente)
-    Update(identificador['_id'],cliente,'palabras.1.1',17)
-    Update(identificador['_id'],cliente,'',17)
-    Delete(identificador,cliente)
-    
-    
+    # print Read(identificador['_id'],cliente)
+    # Update(identificador['_id'],cliente,'palabras.1.1',17)
+    # Update(identificador['_id'],cliente,'',17)
+    # Delete(identificador,cliente)
+    Scrapper("http://www.lavanguardia.com/politica/20170602/423146581480/gordo-deja-pdecat-renuncia-dimision.html")
+
 """
 Como crear la conexión
 
