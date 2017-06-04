@@ -6,7 +6,7 @@ from django.test import TestCase
 
 @step('Open firefox')
 def open_firefox(step):
-    world.driver = webdriver.Firefox()
+    world.driver = webdriver.Chrome()
 
 @step('go to "([^"]*)"')
 def go_to(step,string):
