@@ -36,13 +36,13 @@ def analIce(inputString):
     matches = re.findall(rexUnPoliciaDiferente,uniInput)
     coolWords = [match.lower()for match in matches if match.lower() not in stopWords]
     return Counter(coolWords).most_common()
-def Create(inputString,fecha,cliente):
+def Create(inputString,cliente):
     #if(not inputString):
      #   return None
     diccionario = {}
 
 
-    diccionario.update({'palabras':inputString,'fecha':fecha})
+    diccionario.update({'palabras':inputString})
     #print diccionario
     return cliente.words.insert(diccionario)
 
@@ -58,23 +58,16 @@ def CreateFecha(inputString,fecha,cliente):
     return fecha
 
 def Read(identificador,db):
-    #try:
-    '''    if not objectid.ObjectId.is_valid(identificador):
-        print "Error de identificador"
-        return 'notValid'
-    '''
-    diccionarioLeido=db.words.find({'fecha': identificador}).next()['palabras']
-    #except StopIteration:
-     #   return None
-    return diccionarioLeido
+    try:
+        return db.words.find({'fecha': identificador}).next()['palabras']
+    except StopIteration:
+        return None
 
 def Update(identificador,db,key,value):
-    #if(not bson.objectId.ObjectId.is_valid(identificador)):
-	#return 'notValidID'
     if(not value or not key):
         return None
-    db.words.update({'_id':identificador},{'$set':{key:value}})
-    res=db.words.aggregate([{'$match':{'_id':identificador}},{'$project':{'_id':0,'palabras':1}}]).next()['palabras']['key']
+    db.words.update({'fecha':identificador},{'$set':{key:value}})
+    res=db.words.aggregate([{'$match':{'fecha':identificador}},{'$project':{'_id':0,'palabras':1}}]).next()['palabras']['key']
     return res
 def ReadString(string,db):
     identificador = objectid.ObjectId(string)
