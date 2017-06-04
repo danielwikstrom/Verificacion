@@ -4,3 +4,5 @@ ENV
 .coverage
 .idea
 .xml
+tests/geckodriver.log
+*.log
