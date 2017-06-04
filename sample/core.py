@@ -85,9 +85,10 @@ def Scrapper(URL):
         titulo = xml.find('title')
         titulo = titulo.getText().split('|')[0]
         cuerpo = xml.body.find_all('p', string=True)
+        print dir(cuerpo)
         # print cuerpo.get_attribute_list()
         fecha = xml.find(itemprop="datePublished")
-        fecha = fecha.get('meta content')
+        fecha = fecha.get('datetime')
 
         # Aquí se obtienen las 3 partes que nos interesan de las noticias
         print "Titulo: "
@@ -95,11 +96,12 @@ def Scrapper(URL):
         print "Fecha: "
         print fecha[:10]
         print "Cuerpo: "
-        for i in cuerpo:
-            print i.getText()
-        print xml.body
+        body= [x.getText() for x in cuerpo]
+        body = ("").join(body)
 
-        return titulo,fecha[:10],cuerpo
+        #print xml.body
+
+        return titulo,fecha[:10],body
 
 
     else:
@@ -117,7 +119,7 @@ if __name__ == "__main__":
     # Update(identificador['_id'],cliente,'palabras.1.1',17)
     # Update(identificador['_id'],cliente,'',17)
     # Delete(identificador,cliente)
-    Scrapper("http://www.lavanguardia.com/politica/20170602/423146581480/gordo-deja-pdecat-renuncia-dimision.html")
+    Scrapper("https://www.theguardian.com/society/2017/jun/03/prostate-cancer-therapy-study-abiraterone")
 
 """
 Como crear la conexión
