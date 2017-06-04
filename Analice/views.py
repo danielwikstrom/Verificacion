@@ -14,7 +14,8 @@ def index(request):
     return render(request, 'textForm.html', {'form': TextForm, 'form2':SearchForm})
 def result(request):
     id = request.GET['id']
-    text_content = core.ReadString(id,core.cliente)
+    text_content = core.Read(id,core.cliente)
+
 
     return render(request,'Result.html',{'values':text_content})
 def action(request):
@@ -23,7 +24,7 @@ def action(request):
         if(form.is_valid()):
 
             titulo, fecha, cuerpo = core.Scrapper(form.data['url'])
-
-            id = core.Create(core.analIce(cuerpo),core.cliente)
+            print cuerpo
+            id = core.CreateFecha(core.analIce(cuerpo),fecha,core.cliente)
             return HttpResponseRedirect('/result/'+'?id='+str(id))
     return HttpResponseRedirect('/')

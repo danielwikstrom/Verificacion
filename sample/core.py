@@ -63,7 +63,7 @@ def Read(identificador,db):
         print "Error de identificador"
         return 'notValid'
     '''
-    diccionarioLeido=db.words.find({'fecha': identificador}).next()
+    diccionarioLeido=db.words.find({'fecha': identificador}).next()['palabras']
     #except StopIteration:
      #   return None
     return diccionarioLeido
@@ -102,13 +102,7 @@ def Scrapper(URL):
 
         # Aquí se obtienen las 3 partes que nos interesan de las noticias
 
-        print "Titulo: "
-        print titulo
-        print "Fecha: "
-        print fecha[:10]
-        print "Cuerpo: "
-        for i in cuerpo:
-            print i.getText()
+
         #print xml.body
 
 
