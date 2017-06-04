@@ -4,4 +4,5 @@ python:
 install:
     make init
 script:
-    python tests/test_core.py
+    make test
+    cd tests && lettuce

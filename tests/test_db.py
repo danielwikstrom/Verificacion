@@ -1,6 +1,6 @@
 import mongomock
 from bson import objectid
-import sample
+from .context import sample
 import unittest
 
 class databaseTestSuite(unittest.TestCase):
