@@ -1,4 +1,7 @@
 from django import forms
 
 class TextForm(forms.Form):
-    text_content = forms.CharField(label='text',widget=forms.Textarea, max_length=100)
+    url = forms.CharField(max_length=200)
+
+class SearchForm(forms.Form):
+    mongoId = forms.CharField(max_length=200)
