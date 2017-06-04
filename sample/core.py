@@ -58,19 +58,12 @@ def CreateFecha(inputString,fecha,cliente):
     return fecha
 
 def Read(identificador,db):
-    #try:
-    '''    if not objectid.ObjectId.is_valid(identificador):
-        print "Error de identificador"
-        return 'notValid'
-    '''
-    diccionarioLeido=db.words.find({'fecha': identificador}).next()['palabras']
-    #except StopIteration:
-     #   return None
-    return diccionarioLeido
+    try:
+        return db.words.find({'fecha': identificador}).next()['palabras']
+    except StopIteration:
+        return None
 
 def Update(identificador,db,key,value):
-    #if(not bson.objectId.ObjectId.is_valid(identificador)):
-	#return 'notValidID'
     if(not value or not key):
         return None
     db.words.update({'fecha':identificador},{'$set':{key:value}})

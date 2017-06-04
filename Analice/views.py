@@ -15,7 +15,8 @@ def index(request):
 def result(request):
     id = request.GET['id']
     text_content = core.Read(id,core.cliente)
-
+    if(not text_content):
+        return HttpResponseRedirect('/')
 
     return render(request,'Result.html',{'values':text_content})
 def action(request):
