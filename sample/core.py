@@ -47,13 +47,7 @@ def Create(inputString,cliente):
     return cliente.words.insert(diccionario)
 
 def CreateFecha(inputString,fecha,cliente):
-    #if(not inputString):
-     #   return None
-    diccionario = {}
 
-
-    #diccionario.update({'palabras':inputString,'fecha':fecha})
-    #print diccionario
     cliente.words.update({"fecha": fecha}, { "$inc": {"palabras."+list[0]: list[1] for list in inputString}}, True)
     return fecha
 
@@ -125,6 +119,7 @@ if __name__ == "__main__":
     palabras= Scrapper("http://www.publico.es/actualidad/guerra-taxistas-conductores-uber-cabify.html")
     #print fecha
     cosas = analIce(palabras[0]+' '+palabras[2])
+    print cosas
     fecha=palabras[1]
     id=CreateFecha(cosas,fecha,cliente)
     print Read(id,cliente)

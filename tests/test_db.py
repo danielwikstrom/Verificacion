@@ -11,9 +11,8 @@ class databaseTestSuite(unittest.TestCase):
     def tearDown(self):
         self.db.drop_collection('words')
     def test_insertWithContent(self):
-        self.dictionary={'key','value'}
-        print type(sample.Create(self.dictionary,self.db))
-        self.assertEqual(type(sample.Create(self.dictionary,self.db)),objectid.ObjectId)
+        self.dictionary=[('key',0)]
+        self.assertEqual(type(sample.CreateFecha(self.dictionary,'2017-01-01',self.db)),str)
 
    # def test_insertWithNoContent(self):
     #    self.dictionary={}

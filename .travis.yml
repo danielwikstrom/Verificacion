@@ -5,6 +5,4 @@ install:
     make init
 script:
     make test
-    cd tests
-    lettuce
-    cd ..
+    make testLettuce

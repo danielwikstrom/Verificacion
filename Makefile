@@ -4,6 +4,10 @@ init:
 test:
 	nosetests tests
 	
+testLettuce:
+	cd tests
+	lettuce
+	cd ..
 
 coverage:
 	coverage run sample/core.py
