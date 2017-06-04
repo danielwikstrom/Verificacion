@@ -53,7 +53,7 @@ def CreateFecha(inputString,fecha,cliente):
 
 def Read(identificador,db):
     try:
-        return db.words.find({'fecha': identificador}).next()['palabras']
+        return Counter(db.words.find({'fecha': identificador}).next()['palabras']).most_common()
     except StopIteration:
         return None
 
