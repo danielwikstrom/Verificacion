@@ -37,13 +37,13 @@ def analIce(inputString):
     matches = re.findall(rexUnPoliciaDiferente,uniInput)
     coolWords = [match.lower()for match in matches if match.lower() not in stopWords]
     return Counter(coolWords).most_common()
-def Create(inputString,cliente):
+def Create(inputString,fecha,cliente):
     #if(not inputString):
      #   return None
     diccionario = {}
 
 
-    diccionario.update({'palabras':inputString})
+    diccionario.update({'palabras':inputString,'fecha':fecha})
     #print diccionario
     return cliente.words.insert(diccionario)
 
@@ -85,17 +85,13 @@ def Scrapper(URL):
         titulo = xml.find('title')
         titulo = titulo.getText().split('|')[0]
         cuerpo = xml.body.find_all('p', string=True)
-        print dir(cuerpo)
+
         # print cuerpo.get_attribute_list()
         fecha = xml.find(itemprop="datePublished")
         fecha = fecha.get('datetime')
 
         # Aquí se obtienen las 3 partes que nos interesan de las noticias
-        print "Titulo: "
-        print titulo
-        print "Fecha: "
-        print fecha[:10]
-        print "Cuerpo: "
+
         body= [x.getText() for x in cuerpo]
         body = ("").join(body)
 
@@ -119,8 +115,11 @@ if __name__ == "__main__":
     # Update(identificador['_id'],cliente,'palabras.1.1',17)
     # Update(identificador['_id'],cliente,'',17)
     # Delete(identificador,cliente)
-    Scrapper("https://www.theguardian.com/society/2017/jun/03/prostate-cancer-therapy-study-abiraterone")
-
+    fecha= Scrapper("https://www.theguardian.com/society/2017/jun/03/prostate-cancer-therapy-study-abiraterone")
+    #print fecha
+    cosas='cosas'
+    id=Create(cosas,fecha[1],cliente)
+    print Read(id,cliente)
 """
 Como crear la conexión
 
