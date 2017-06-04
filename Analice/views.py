@@ -24,7 +24,6 @@ def action(request):
         if(form.is_valid()):
 
             titulo, fecha, cuerpo = core.Scrapper(form.data['url'])
-            print cuerpo
             id = core.CreateFecha(core.analIce(cuerpo),fecha,core.cliente)
             return HttpResponseRedirect('/result/'+'?id='+str(id))
     return HttpResponseRedirect('/')

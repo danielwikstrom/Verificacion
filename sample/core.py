@@ -91,11 +91,10 @@ def Scrapper(URL):
 
     if ok == 200:
 
-        xml = BeautifulSoup(req.text, "lxml")
+        xml = BeautifulSoup(req.text.encode('utf-8', errors='ignore'), "lxml")
         titulo = xml.find('title')
         titulo = titulo.getText().split('|')[0]
         cuerpo = xml.body.find_all('p', string=True)
-
         # print cuerpo.get_attribute_list()
         fecha = xml.find(itemprop="datePublished")
         fecha = fecha.get('datetime')
@@ -106,7 +105,7 @@ def Scrapper(URL):
         #print xml.body
 
 
-        body= [x.getText() for x in cuerpo]
+        body = [x.getText() for x in cuerpo]
         body = ("").join(body)
 
         #print xml.body
