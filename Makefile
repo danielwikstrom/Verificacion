@@ -3,7 +3,7 @@ init:
 
 test:
 	nosetests tests
-	START "" python manage.py runserver 
+	START -B python manage.py runserver 
 	cd tests; \
 	lettuce; 
 

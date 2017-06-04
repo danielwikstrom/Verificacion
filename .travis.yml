@@ -5,4 +5,4 @@ install:
     make init
 script:
     make test
-    make testLettuce
+
