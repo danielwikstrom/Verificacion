@@ -2,7 +2,7 @@ language: python
 python:
     "2.7"
 addons:
-    chrome: "58.0"
+    chrome: "58.0.3029"
 before_install:
     - wget https://chromedriver.storage.googleapis.com/2.29/chromedriver_linux64.zip
     - mkdir chromedriver
