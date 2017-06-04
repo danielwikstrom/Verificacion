@@ -3,11 +3,10 @@ init:
 
 test:
 	nosetests tests
-	
-testLettuce:
 	cd tests; \
-	lettuce; \
-	cd ..;
+	lettuce; 
+
+	
 
 coverage:
 	coverage run sample/core.py
