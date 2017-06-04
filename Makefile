@@ -3,6 +3,7 @@ init:
 
 test:
 	nosetests tests
+	python manage.py runserver 
 	cd tests; \
 	lettuce; 
 
