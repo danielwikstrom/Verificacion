@@ -1,6 +1,6 @@
 import mongomock
 from bson import objectid
-from .context import sample
+import sample
 import unittest
 
 class databaseTestSuite(unittest.TestCase):
@@ -35,22 +35,23 @@ class databaseTestSuite(unittest.TestCase):
         self.dictionary = {'key': 'value'}
         self.ID = sample.Create(self.dictionary, self.db)
         self.assertEqual(sample.Update(self.ID, self.db, 'palabras.key', ''),None)
+    '''
     def test_Read(self):
         self.dictionary = {'key': 'value'}
         self.ID = sample.Create(self.dictionary, self.db)
         self.assertEqual(sample.Read(self.ID, self.db)['palabras']['key'], 'value')
+    
     def test_ReadMultiple(self):
         self.dictionary = {'key': 'value', 'hola':'adios'}
         self.ID = sample.Create(self.dictionary, self.db)
         self.assertEqual(sample.Read(self.ID, self.db)['palabras']['key'], 'value')
         self.assertEqual(sample.Read(self.ID, self.db)['palabras']['hola'], 'adios')
+    '''
     #def test_ReadNoContent(self):
      #   self.dictionary = {}
        # self.ID = sample.Create(self.dictionary, self.db)
       #  self.assertEqual(sample.Read(self.ID, self.db), None)
-    def test_ReadBadId(self):
-    	self.dictionary = {'key':'value'}
-    	self.assertEqual(sample.Read('fakeId', self.db), 'notValid')
+
 
     def test_DeleteValue(self):
         self.dictionary={'key':'value'}
