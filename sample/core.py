@@ -73,8 +73,8 @@ def Update(identificador,db,key,value):
 	#return 'notValidID'
     if(not value or not key):
         return None
-    db.words.update({'_id':identificador},{'$set':{key:value}})
-    res=db.words.aggregate([{'$match':{'_id':identificador}},{'$project':{'_id':0,'palabras':1}}]).next()['palabras']['key']
+    db.words.update({'fecha':identificador},{'$set':{key:value}})
+    res=db.words.aggregate([{'$match':{'fecha':identificador}},{'$project':{'_id':0,'palabras':1}}]).next()['palabras']['key']
     return res
 def ReadString(string,db):
     identificador = objectid.ObjectId(string)
