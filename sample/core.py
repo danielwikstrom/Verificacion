@@ -99,6 +99,8 @@ def Scrapper(URL):
             print i.getText()
         print xml.body
 
+        return titulo,fecha[:10],cuerpo
+
 
     else:
         print ok
