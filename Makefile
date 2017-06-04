@@ -3,11 +3,11 @@ init:
 
 test:
 	nosetests tests
-	START -B python manage.py runserver 
 	cd tests; \
 	lettuce; 
-
 	
+runServer:
+	python manage.py runserver &
 
 coverage:
 	coverage run sample/core.py
