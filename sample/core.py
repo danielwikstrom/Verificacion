@@ -2,6 +2,8 @@
 from collections import Counter
 from bson import objectid
 import Connection
+import requests
+from bs4 import BeautifulSoup
 
 import re
 
@@ -34,23 +36,34 @@ def analIce(inputString):
     matches = re.findall(rexUnPoliciaDiferente,uniInput)
     coolWords = [match.lower()for match in matches if match.lower() not in stopWords]
     return Counter(coolWords).most_common()
-def Create(inputString,cliente):
+def Create(inputString,fecha,cliente):
     #if(not inputString):
      #   return None
     diccionario = {}
 
 
-    diccionario.update({'palabras':inputString})
+    diccionario.update({'palabras':inputString,'fecha':fecha})
     #print diccionario
     return cliente.words.insert(diccionario)
 
+def CreateFecha(inputString,fecha,cliente):
+    #if(not inputString):
+     #   return None
+    diccionario = {}
+
+
+    #diccionario.update({'palabras':inputString,'fecha':fecha})
+    #print diccionario
+    cliente.words.update({"fecha": fecha}, { "$inc": {"palabras."+list[0]: list[1] for list in inputString}}, True)
+    return fecha
 
 def Read(identificador,db):
     #try:
-    if not objectid.ObjectId.is_valid(identificador):
+    '''    if not objectid.ObjectId.is_valid(identificador):
         print "Error de identificador"
         return 'notValid'
-    diccionarioLeido=db.words.find({'_id': identificador}).next()
+    '''
+    diccionarioLeido=db.words.find({'fecha': identificador}).next()['palabras']
     #except StopIteration:
      #   return None
     return diccionarioLeido
@@ -68,22 +81,61 @@ def ReadString(string,db):
     return db.words.find({'_id': identificador}).next()['palabras']
 
 def Delete(identificador,db):
-    db.words.remove({'_id': identificador})
+    db.words.remove({'fecha': identificador})
+
+
+def Scrapper(URL):
+    req = requests.get(URL)
+
+    ok = req.status_code
+
+    if ok == 200:
+
+        xml = BeautifulSoup(req.text.encode('utf-8', errors='ignore'), "lxml")
+        titulo = xml.find('title')
+        titulo = titulo.getText().split('|')[0]
+        cuerpo = xml.body.find_all('p', string=True)
+        # print cuerpo.get_attribute_list()
+        fecha = xml.find(itemprop="datePublished")
+        fecha = fecha.get('datetime')
+
+        # Aquí se obtienen las 3 partes que nos interesan de las noticias
+
+
+        #print xml.body
+
+
+        body = [x.getText() for x in cuerpo]
+        body = ("").join(body)
+
+        #print xml.body
+
+        return titulo,fecha[:10],body
+
+
+    else:
+        print ok
 
 
 if __name__ == "__main__":
-    palabra=[]
-    palabra=analIce("Hola hey hey HEY Aquíaaa AquÍaaa.  Á  É  Í Ñ Ó Ú Ü á é í  ó ú ü ñu I'm a about ab1ba ")
+    # palabra=[]
+    # palabra=analIce("Hola hey hey HEY Aquíaaa AquÍaaa.  Á  É  Í Ñ Ó Ú Ü á é í  ó ú ü ñu I'm a about ab1ba ")
 
-    id= Create(palabra,cliente)
-    identificador=cliente.words.aggregate([{'$project':{'_id':1}},{'$limit':1}]).next()
+    # id= Create(palabra,cliente)
+    # identificador=cliente.words.aggregate([{'$project':{'_id':1}},{'$limit':1}]).next()
 
-    print Read(identificador['_id'],cliente)
-    Update(identificador['_id'],cliente,'palabras.1.1',17)
-    Update(identificador['_id'],cliente,'',17)
-    Delete(identificador,cliente)
-    
-    
+    # print Read(identificador['_id'],cliente)
+    # Update(identificador['_id'],cliente,'palabras.1.1',17)
+    # Update(identificador['_id'],cliente,'',17)
+    # Delete(identificador,cliente)
+
+    palabras= Scrapper("https://www.theguardian.com/society/2017/jun/03/prostate-cancer-therapy-study-abiraterone")
+    #print fecha
+    cosas = analIce(palabras[0]+' '+palabras[2])
+    fecha=palabras[1]
+    id=CreateFecha(cosas,fecha,cliente)
+    print Read(id,cliente)
+
 """
 Como crear la conexión
 
