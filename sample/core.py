@@ -54,7 +54,7 @@ def CreateFecha(inputString,fecha,cliente):
 
     #diccionario.update({'palabras':inputString,'fecha':fecha})
     #print diccionario
-    cliente.words.update({"fecha": fecha}, { "$inc": {"palabras."+list[0]: list[1] for list in inputString}}, {"upsert" : True })
+    cliente.words.update({"fecha": fecha}, { "$inc": {"palabras."+list[0]: list[1] for list in inputString}}, True)
     return fecha
 
 def Read(identificador,db):
