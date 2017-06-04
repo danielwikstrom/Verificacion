@@ -4,14 +4,14 @@ Feature: Reset button
     Scenario: Text in the field
         Given Open Firefox
         And go to "http://localhost:8000"
-        And "hola" is introduced
+        And "hola" is introduced in "id_url"
         When "reset" button is pressed
-        Then the text field is empty
+        Then the "id_url" is empty
         And close Firefox
     Scenario: No text in the field
         Given Open Firefox
         And go to "http://localhost:8000"
-        And the text field is empty
+        And the "id_url" is empty
         When "reset" button is pressed
-        Then the text field is empty
+        Then the "id_url" is empty
         And close Firefox

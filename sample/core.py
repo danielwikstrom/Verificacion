@@ -122,7 +122,7 @@ if __name__ == "__main__":
     # Update(identificador['_id'],cliente,'',17)
     # Delete(identificador,cliente)
 
-    palabras= Scrapper("https://www.theguardian.com/society/2017/jun/03/prostate-cancer-therapy-study-abiraterone")
+    palabras= Scrapper("http://www.publico.es/actualidad/guerra-taxistas-conductores-uber-cabify.html")
     #print fecha
     cosas = analIce(palabras[0]+' '+palabras[2])
     fecha=palabras[1]
