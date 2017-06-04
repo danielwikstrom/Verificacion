@@ -36,13 +36,13 @@ def analIce(inputString):
     matches = re.findall(rexUnPoliciaDiferente,uniInput)
     coolWords = [match.lower()for match in matches if match.lower() not in stopWords]
     return Counter(coolWords).most_common()
-def Create(inputString,fecha,cliente):
+def Create(inputString,cliente):
     #if(not inputString):
      #   return None
     diccionario = {}
 
 
-    diccionario.update({'palabras':inputString,'fecha':fecha})
+    diccionario.update({'palabras':inputString})
     #print diccionario
     return cliente.words.insert(diccionario)
 
