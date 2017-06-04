@@ -21,7 +21,7 @@ def check_empty_text(step,textbox):
 def write_feature(step,string,textbox):
     world.textBefore = world.driver.find_element_by_id(textbox).get_attribute('value')
     textAfter = world.textBefore+string
-    textAfter = textAfter[0:100]
+    textAfter = textAfter[0:200]
 
     world.driver.find_element_by_id(textbox).send_keys(textAfter)
 

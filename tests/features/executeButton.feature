@@ -1,9 +1,9 @@
 Feature: Execute button
     Counts the number of times every word appears in a text
-    Scenario: "Rex un Policia Diferente" in the text field
+    Scenario: An article in the text field
         Given Open Firefox
         And go to "http://localhost:8000"
-        And "Rex un Policia Diferente" is introduced in "id_url"
+        And "http://www.publico.es/actualidad/guerra-taxistas-conductores-uber-cabify.html" is introduced in "id_url"
         And "execute" button is pressed
         Then is in result
         And close Firefox
