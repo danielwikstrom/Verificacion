@@ -50,10 +50,11 @@ def Create(inputString,fecha,cliente):
 
 def Read(identificador,db):
     #try:
-    if not objectid.ObjectId.is_valid(identificador):
+    '''    if not objectid.ObjectId.is_valid(identificador):
         print "Error de identificador"
         return 'notValid'
-    diccionarioLeido=db.words.find({'_id': identificador}).next()
+    '''
+    diccionarioLeido=db.words.find({'fecha': identificador}).next()
     #except StopIteration:
      #   return None
     return diccionarioLeido
@@ -115,10 +116,12 @@ if __name__ == "__main__":
     # Update(identificador['_id'],cliente,'palabras.1.1',17)
     # Update(identificador['_id'],cliente,'',17)
     # Delete(identificador,cliente)
-    fecha= Scrapper("https://www.theguardian.com/society/2017/jun/03/prostate-cancer-therapy-study-abiraterone")
+    palabras= Scrapper("https://www.theguardian.com/society/2017/jun/03/prostate-cancer-therapy-study-abiraterone")
     #print fecha
-    cosas='cosas'
-    id=Create(cosas,fecha[1],cliente)
+    cosas = analIce(palabras[0]+' '+palabras[2])
+    fecha=palabras[1]
+    id='2017-07-07'
+    #Create('parangaricutirimicuaro','2017-07-07',cliente)
     print Read(id,cliente)
 """
 Como crear la conexión
