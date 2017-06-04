@@ -46,6 +46,16 @@ def Create(inputString,fecha,cliente):
     #print diccionario
     return cliente.words.insert(diccionario)
 
+def CreateFecha(inputString,fecha,cliente):
+    #if(not inputString):
+     #   return None
+    diccionario = {}
+
+
+    #diccionario.update({'palabras':inputString,'fecha':fecha})
+    #print diccionario
+    cliente.words.update({"fecha": fecha}, { "$inc": {"palabras."+list[0]: list[1] for list in inputString}}, {"upsert" : True })
+    return fecha
 
 def Read(identificador,db):
     #try:
@@ -130,8 +140,7 @@ if __name__ == "__main__":
     #print fecha
     cosas = analIce(palabras[0]+' '+palabras[2])
     fecha=palabras[1]
-    id='2017-07-07'
-    #Create('parangaricutirimicuaro','2017-07-07',cliente)
+    id=CreateFecha(cosas,fecha,cliente)
     print Read(id,cliente)
 
 """
