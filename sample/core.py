@@ -72,7 +72,7 @@ def ReadString(string,db):
     return db.words.find({'_id': identificador}).next()['palabras']
 
 def Delete(identificador,db):
-    db.words.remove({'_id': identificador})
+    db.words.remove({'fecha': identificador})
 
 
 def Scrapper(URL):
