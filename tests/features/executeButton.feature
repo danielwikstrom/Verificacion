@@ -3,7 +3,7 @@ Feature: Execute button
     Scenario: "Rex un Policia Diferente" in the text field
         Given Open Firefox
         And go to "http://localhost:8000"
-        And "Rex un Policia Diferente" is introduced
+        And "Rex un Policia Diferente" is introduced in "id_url"
         And "execute" button is pressed
         Then is in result
         And close Firefox
@@ -11,15 +11,15 @@ Feature: Execute button
     Scenario: Nothing in the text field
         Given Open Firefox
         And go to "http://localhost:8000"
-        And the text field is empty
+        And the "id_url" is empty
         When "execute" button is pressed
-        Then the text field is empty
+        Then the "id_url" is empty
         And close Firefox
 
     Scenario: only spaces
         Given Open Firefox
         And go to "http://localhost:8000"
-        And "   " is introduced
+        And "   " is introduced in "id_url"
         When "execute" button is pressed
         Then go to "http://localhost:8000"
         And close Firefox

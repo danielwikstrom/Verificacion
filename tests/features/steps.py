@@ -12,30 +12,30 @@ def open_firefox(step):
 def go_to(step,string):
     world.driver.get(string)
 
-@step('the text field is empty')
-def check_empty_text(step):
+@step('the "([^"]*)" is empty')
+def check_empty_text(step,textbox):
     # Create your tests here.
-    assert world.driver.find_element_by_id('id_text_content').get_attribute('value') == ""
+    assert world.driver.find_element_by_id(textbox).get_attribute('value') == ""
 
-@step('"([^"]*)" is introduced')
-def write_feature(step,string):
-    world.textBefore = world.driver.find_element_by_id('id_text_content').get_attribute('value')
+@step('"([^"]*)" is introduced in "([^"]*)"')
+def write_feature(step,string,textbox):
+    world.textBefore = world.driver.find_element_by_id(textbox).get_attribute('value')
     textAfter = world.textBefore+string
     textAfter = textAfter[0:100]
 
-    world.driver.find_element_by_id('id_text_content').send_keys(textAfter)
+    world.driver.find_element_by_id(textbox).send_keys(textAfter)
 
 
 
-    assert world.driver.find_element_by_id('id_text_content').get_attribute('value')== textAfter
+    assert world.driver.find_element_by_id(textbox).get_attribute('value')== textAfter
 
-@step('there is only "([^"]*)" in text field')
-def check_only_text(step,string):
-    assert world.driver.find_element_by_id('id_text_content').get_attribute('value')== string
+@step('there is only "([^"]*)" in "([^"]*)"')
+def check_only_text(step,string,textbox):
+    assert world.driver.find_element_by_id(textbox).get_attribute('value')== string
 
-@step('text in text field has not changed')
-def not_changed(step):
-    assert world.driver.find_element_by_id('id_text_content').get_attribute('value') == world.textBefore
+@step('text in "([^"]*)" has not changed')
+def not_changed(step,textbox):
+    assert world.driver.find_element_by_id(textbox).get_attribute('value') == world.textBefore
 
 @step('"([^"]*)" button is pressed')
 def press_button(step,string):
