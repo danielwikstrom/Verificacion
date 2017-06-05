@@ -8,6 +8,7 @@ test:
 	
 runServer:
 	python manage.py runserver &
+	python manage.py migrate &
 
 coverage:
 	coverage run sample/core.py
