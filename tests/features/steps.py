@@ -4,8 +4,8 @@ from selenium.webdriver.common.keys import Keys
 import time
 from django.test import TestCase
 
-@step('Open firefox')
-def open_firefox(step):
+@step('Open chrome')
+def open_chrome(step):
     world.driver = webdriver.Chrome()
 
 @step('go to "([^"]*)"')
@@ -41,7 +41,7 @@ def not_changed(step,textbox):
 def press_button(step,string):
     world.driver.find_element_by_id('btn_'+string).click()
 
-@step('close Firefox')
+@step('close chrome')
 def close(step):
     world.driver.close()
 
