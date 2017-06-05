@@ -13,11 +13,6 @@ class databaseTestSuite(unittest.TestCase):
     def test_insertWithContent(self):
         self.dictionary=[('key',0)]
         self.assertEqual(type(sample.CreateFecha(self.dictionary,'2017-01-01',self.db)),str)
-
-   # def test_insertWithNoContent(self):
-    #    self.dictionary={}
-     #   print type(sample.Create(self.dictionary,self.db))
-      #  self.assertEqual(sample.Create(self.dictionary,self.db),None)
     def test_Update(self):
         self.dictionary=[('key',0)]
         self.ID=sample.CreateFecha(self.dictionary,'2017-01-01',self.db)
@@ -30,26 +25,20 @@ class databaseTestSuite(unittest.TestCase):
         self.dictionary = [('key', 0)]
         self.ID = sample.CreateFecha(self.dictionary,'2017-12-20', self.db)
         self.assertEqual(sample.Update(self.ID, self.db, '', 'RexUnPoliciaDiferente'),None)
+
     def test_UpdateNoValue(self):
         self.dictionary = [('key', 0)]
         self.ID = sample.CreateFecha(self.dictionary,'1994-01-17', self.db)
         self.assertEqual(sample.Update(self.ID, self.db, 'palabras.key', ''),None)
-    '''
-    def test_Read(self):
-        self.dictionary = {'key': 'value'}
-        self.ID = sample.Create(self.dictionary, self.db)
-        self.assertEqual(sample.Read(self.ID, self.db)['palabras']['key'], 'value')
-    
-    def test_ReadMultiple(self):
-        self.dictionary = {'key': 'value', 'hola':'adios'}
-        self.ID = sample.Create(self.dictionary, self.db)
-        self.assertEqual(sample.Read(self.ID, self.db)['palabras']['key'], 'value')
-        self.assertEqual(sample.Read(self.ID, self.db)['palabras']['hola'], 'adios')
-    '''
-    #def test_ReadNoContent(self):
-     #   self.dictionary = {}
-       # self.ID = sample.Create(self.dictionary, self.db)
-      #  self.assertEqual(sample.Read(self.ID, self.db), None)
+
+    def test_badRead(self):
+        result = sample.Read("no existo lol",self.db)
+        self.assertIsNone(result)
+
+    def test_goodRead(self):
+        sample.CreateFecha([['Existo',3]],'1-01-2001',self.db)
+        result = sample.Read("1-01-2001", self.db)
+        self.assertIsNotNone(result)
 
 
     def test_DeleteValue(self):
