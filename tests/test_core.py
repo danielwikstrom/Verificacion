@@ -115,7 +115,11 @@ class CoreTestSuite(unittest.TestCase):
     def test_countStopwordWithCaps(self):
         result = sample.analIce("a an About how HoW about An a")
         self.assertEqual(len(result), 0)
-
-
+    def test_scrapperWrongURL(self):
+        title,fecha,cuerpo = sample.Scrapper("https://google.es")
+        self.assertIsNone(fecha)
+    def test_scrapperGoodURL(self):
+        title,fecha,cuerpo = sample.Scrapper("https://www.theguardian.com/uk-news/2017/jun/04/foreign-nationals-victims-of-london-terror-attacks")
+        self.assertIsNotNone(fecha)
 if __name__ == '__main__':
     unittest.main()

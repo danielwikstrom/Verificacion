@@ -1,1 +1,1 @@
-from .core import analIce,Create,Update,Read,Delete,CreateFecha
+from .core import analIce,Create,Update,Read,Delete,CreateFecha,Scrapper

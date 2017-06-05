@@ -17,14 +17,13 @@ def result(request):
     text_content = core.Read(id,core.cliente)
     if(not text_content):
         return HttpResponseRedirect('/')
-
     return render(request,'Result.html',{'values':text_content})
+
 def action(request):
     if request.method == 'POST':
         form = TextForm(request.POST)
         if(form.is_valid()):
-
             titulo, fecha, cuerpo = core.Scrapper(form.data['url'])
-            id = core.CreateFecha(core.analIce(cuerpo),fecha,core.cliente)
-            return HttpResponseRedirect('/result/'+'?id='+str(id))
+            if(titulo and fecha and cuerpo):
+                return HttpResponseRedirect('/result/'+'?id='+str(core.CreateFecha(core.analIce(cuerpo),fecha,core.cliente)))
     return HttpResponseRedirect('/')

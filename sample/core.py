@@ -80,28 +80,17 @@ def Scrapper(URL):
 
         xml = BeautifulSoup(req.text.encode('utf-8', errors='ignore'), "lxml")
         titulo = xml.find('title')
-        titulo = titulo.getText().split('|')[0]
+        if(titulo):
+            titulo = titulo.getText().split('|')[0]
         cuerpo = xml.body.find_all('p', string=True)
-        # print cuerpo.get_attribute_list()
         fecha = xml.find(itemprop="datePublished")
-        fecha = fecha.get('datetime')
-
-        # Aquí se obtienen las 3 partes que nos interesan de las noticias
-
-
-        #print xml.body
-
+        if(fecha):
+            fecha = fecha.get('datetime')[:10]
 
         body = [x.getText() for x in cuerpo]
         body = ("").join(body)
 
-        #print xml.body
-
-        return titulo,fecha[:10],body
-
-
-    else:
-        print ok
+        return titulo,fecha,body
 
 
 if __name__ == "__main__":
@@ -116,7 +105,7 @@ if __name__ == "__main__":
     # Update(identificador['_id'],cliente,'',17)
     # Delete(identificador,cliente)
 
-    palabras= Scrapper("http://www.publico.es/actualidad/guerra-taxistas-conductores-uber-cabify.html")
+    palabras= Scrapper("http://google.es")
     #print fecha
     cosas = analIce(palabras[0]+' '+palabras[2])
     print cosas
@@ -124,13 +113,3 @@ if __name__ == "__main__":
     id=CreateFecha(cosas,fecha,cliente)
     print Read(id,cliente)
 
-"""
-Como crear la conexión
-
- conexion= connection.Conection()
-    cliente=conexion.conected() #Conexion creada
-
-
-    contenido=cliente.city.find_one() #city es la coleccion de la base de datos en la querramos hacer la operación find_one
-
-"""
