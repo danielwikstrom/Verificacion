@@ -1,5 +1,7 @@
 Feature: Execute button
-    Counts the number of times every word appears in a text
+    In order to count the number of words
+    As a user
+    We'll use the url
     Scenario: An article in the text field
         Given Open chrome
         And go to "http://localhost:8000"

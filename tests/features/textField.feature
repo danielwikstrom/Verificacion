@@ -1,5 +1,7 @@
 Feature: Write in text field
-    There is a text field where one can type in text to have it analized
+    In order analize a url
+    As a user
+    We'll use the url proper url
     Scenario: Empty text field
         Given Open chrome
         And go to "http://localhost:8000"

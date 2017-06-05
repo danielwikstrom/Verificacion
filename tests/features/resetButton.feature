@@ -1,6 +1,7 @@
 Feature: Reset button
-    Empties the text field
-
+    In order to reset the text
+    As a user
+    We'll use the reset button
     Scenario: Text in the field
         Given Open chrome
         And go to "http://localhost:8000"
