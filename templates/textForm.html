@@ -24,7 +24,9 @@
         <input type="submit" id="btn_execute" value="Execute">
 
     </form>
-
+    <br>
+    <h1>Buscar</h1>
+    <p>Introduce fecha en formato yyyy-mm-dd</p>
     <form action="/result/" method="get" id="Search">
         {% csrf_token %}
         {% for field in form2 %}

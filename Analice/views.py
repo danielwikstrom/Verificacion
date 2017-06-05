@@ -13,11 +13,13 @@ from forms import TextForm,SearchForm
 def index(request):
     return render(request, 'textForm.html', {'form': TextForm, 'form2':SearchForm})
 def result(request):
-    id = request.GET['id']
-    text_content = core.Read(id,core.cliente)
-    if(not text_content):
-        return HttpResponseRedirect('/')
-    return render(request,'Result.html',{'values':text_content})
+    form = SearchForm(request.GET)
+    if(form.is_valid()):
+
+        text_content = core.Read(form.data['id'],core.cliente)
+        if(text_content):
+            return render(request,'Result.html',{'values':text_content})
+    return HttpResponseRedirect('/')
 
 def action(request):
     if request.method == 'POST':
