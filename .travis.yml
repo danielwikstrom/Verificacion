@@ -17,8 +17,8 @@ install:
     make init
 
 before_script:
-    make runServer
-    mongo BaseTesting --eval 'db.addUser("travis","test");'
+    - make runServer
+    - mongo BaseTesting --eval 'db.addUser("travis","test");'
     
 script:
     make test
