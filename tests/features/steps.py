@@ -47,5 +47,5 @@ def close(step):
 
 @step('is in result')
 def result(step):
-    world.driver.implicitly_wait(10)
+    world.driver.implicitly_wait(2)
     assert str(world.driver.current_url[22:28]) == "result"

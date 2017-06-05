@@ -1,7 +1,9 @@
 language: python
 python:
     "2.7"
-    
+
+services:
+    mongodb
 before_install:
     - wget http://chromedriver.storage.googleapis.com/2.7/chromedriver_linux64.zip
     - unzip chromedriver_linux64.zip
@@ -16,6 +18,7 @@ install:
 
 before_script:
     make runServer
+    mongo BaseTesting --eval 'db.addUser("travis","test");'
     
 script:
     make test
