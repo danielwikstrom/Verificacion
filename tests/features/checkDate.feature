@@ -3,7 +3,10 @@ Feature: Date button
     Scenario: There is a entry
         Given Open chrome
         And go to "http://localhost:8000"
-        And "2017-06-03" is introduced in "id_id"
+        And "https://www.theguardian.com/uk-news/2017/jun/04/london-bridge-attack-pushes-theresa-may-into-promising-new-laws" is introduced in "id_url"
+        And "execute" button is pressed
+        And go to "http://localhost:8000"
+        And "2017-06-04" is introduced in "id_id"
         And "search" button is pressed
         Then is in result
         And close chrome
